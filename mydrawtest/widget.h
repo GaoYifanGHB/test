@@ -2,6 +2,8 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include<QPen>
+#include<QPainter>
 
 namespace Ui {
 class Widget;
@@ -14,6 +16,8 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
+protected:
+    void paintEvent(QPaintEvent *);
     
 private:
     Ui::Widget *ui;
