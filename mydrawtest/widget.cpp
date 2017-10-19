@@ -15,6 +15,7 @@ void Widget::paintEvent(QPaintEvent *event){
     int startAngle=30*16;
     int spanAngle=120*16;
     painter.drawArc(rectangle,startAngle,spanAngle);
+    pen.setWidth(1);
 }
 
 Widget::~Widget()
