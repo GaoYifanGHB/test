@@ -24,6 +24,7 @@ void Widget::drawGrid(int l, int w, int h)
     QPainter painters(this);
     int cl=height()/2;
     int cw=width()/2;
+    //ª≠∫·œﬂ
     for(int i=-l/2-h;i<=l/2+h;i++){
         if(i>=-l/2&&i<=l/2){
             painters.drawLine(QPoint(cw-(w/2+h)*gridsize,cl+i*gridsize),QPoint(cw+(w/2+h)*gridsize,cl+i*gridsize));
@@ -31,6 +32,7 @@ void Widget::drawGrid(int l, int w, int h)
             painters.drawLine(QPoint(cw-w/2*gridsize,cl+i*gridsize),QPoint(cw+w/2*gridsize,cl+i*gridsize));
         }
     }
+    //ª≠ ˙œﬂ
     for(int i=-w/2-h;i<=w/2+h;i++){
         if(i>=-w/2&&i<=w/2){
             painters.drawLine(QPoint(cw+i*gridsize,cl-(l/2+h)*gridsize),QPoint(cw+i*gridsize,cl+(l/2+h)*gridsize));

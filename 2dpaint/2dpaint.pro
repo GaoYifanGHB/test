@@ -15,10 +15,10 @@ TEMPLATE = app
 SOURCES += main.cpp\
         widget.cpp \
     digit.cpp \
-    digitlistmould.cpp
+    digitmananger.cpp
 
 HEADERS  += widget.h \
     digit.h \
-    digitlistmould.h
+    digitmananger.h
 
 FORMS    += widget.ui

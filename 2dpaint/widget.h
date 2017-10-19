@@ -27,9 +27,6 @@ protected:
 private:
     Ui::Widget *ui;
     int gridsize;
-//    int height;
-//    int len;
-//    int width;
 };
 
 #endif // WIDGET_H
