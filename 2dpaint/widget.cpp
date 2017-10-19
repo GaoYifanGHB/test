@@ -17,8 +17,6 @@ Widget::~Widget()
 //»­³öÍø¸ñ
 void Widget::drawGrid(int l, int w, int h)
 {
-
-
     initGridSize(l,w,h);
     l/=10;
     w/=10;

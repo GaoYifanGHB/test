@@ -16,6 +16,13 @@ void Widget::paintEvent(QPaintEvent *event){
     int spanAngle=120*16;
     painter.drawArc(rectangle,startAngle,spanAngle);
     pen.setWidth(1);
+
+    QLinearGradient linearGradient(QPointF(40,190),QPointF(70,190));
+    linearGradient.setColorAt(0,Qt::yellow);
+    linearGradient.setColorAt(0.5,Qt::red);
+    painter.setBrush(linearGradient);
+    painter.drawRect(10,170,90,40);
+
 }
 
 Widget::~Widget()

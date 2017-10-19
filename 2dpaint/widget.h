@@ -6,6 +6,7 @@
 #include<QPoint>
 #include<cstdio>
 
+
 namespace Ui {
 class Widget;
 }
