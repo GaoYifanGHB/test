@@ -17,6 +17,9 @@ Widget::~Widget()
 //»­³öÍø¸ñ
 void Widget::drawGrid(int l, int w, int h)
 {
+
+
+    initGridSize(l,w,h);
     l/=10;
     w/=10;
     h/=10;
@@ -45,18 +48,16 @@ void Widget::initGridSize(int l,int w,int h)
     double m=l>w?l:w;
     m+=2*h;
     double n=height()>width()?height():width();
+    n*=0.9;
     gridsize=(int)(n/m*10.0);
 }
 
 
 
 void Widget::paintEvent(QPaintEvent *event){
-//    gridsize=height()/50;
-
     int l=500;
     int w=800;
     int h=100;
-    initGridSize(l,w,h);
     printf("³¤£º%d\n",height());
     printf("¿í£º%d\n",width());
     drawGrid(l,w,h);
