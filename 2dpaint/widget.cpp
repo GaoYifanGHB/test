@@ -42,10 +42,10 @@ void Widget::drawGrid(int l, int w, int h)
 
 void Widget::initGridSize(int l,int w,int h)
 {
-    int m=l>w?l:w;
+    double m=l>w?l:w;
     m+=2*h;
-    l=height()>width()?height():width();
-    gridsize=l/m*10;
+    double n=height()>width()?height():width();
+    gridsize=(int)(n/m*10.0);
 }
 
 
