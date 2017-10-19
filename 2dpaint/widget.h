@@ -2,6 +2,9 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include<QPainter>
+#include<QPoint>
+#include<cstdio>
 
 namespace Ui {
 class Widget;
@@ -14,9 +17,18 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
-    
+    void drawGrid(int len,int width,int height);
+    void initGridSize(int l,int w,int h);
+protected:
+    void paintEvent(QPaintEvent *);
+
+
 private:
     Ui::Widget *ui;
+    int gridsize;
+//    int height;
+//    int len;
+//    int width;
 };
 
 #endif // WIDGET_H
