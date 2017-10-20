@@ -27,7 +27,7 @@ void DigitMananger::initAll()
                 if(mat[i][j])num++;
             }
         }
-        filename=""
+        filename="";
         fs.close();
         Digit d(l,w,mat,num);
         this->mould.push_back(d);
