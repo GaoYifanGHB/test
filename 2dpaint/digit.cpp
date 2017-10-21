@@ -53,7 +53,7 @@ void Digit::getMat(bool **mat)
     }
 }
 
-Digit::Digit(int l, int w, bool** mat,int num)
+Digit::Digit(int l, int w, bool mat[10][10],int num)
 {
     this->l=l;
     this->w=w;
@@ -63,5 +63,5 @@ Digit::Digit(int l, int w, bool** mat,int num)
             this->mat[i][j]=mat[i][j];
         }
     }
-    this->color=QColor(0,0,0);
+//    this->color=QColor(0,0,0);
 }

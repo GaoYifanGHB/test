@@ -9,13 +9,15 @@ class Digit
 private:
     int l;//数码小块矩阵的长
     int w;//数码小块矩阵的宽
-    bool mat[10][10];//数码小块矩阵
-    int num;//小块中非零元素的个数
     int xp;//左上角第一个元素的x坐标
     int yp;//左上角第一个元素的y坐标
     QColor color;//小块的颜色
 
+
+
 public:
+    bool mat[10][10];//数码小块矩阵
+    int num;//小块中非零元素的个数
     int getLength();
     int getWidth();
     int getNum();
@@ -29,7 +31,7 @@ public:
     void setColor(QColor color);
     //获取矩阵
     void getMat(bool**mat);
-    Digit(int l,int w,bool**mat,int num);
+    Digit(int l,int w,bool mat1[10][10],int num);
 
     Digit();
 };
