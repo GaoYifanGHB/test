@@ -44,6 +44,7 @@ public:
     DigitMananger();
     //初始化全部
     void initAll();
+    void showAll(int l,int w);
     //在(xs-xe)(ys-ye)的矩形中自动添加digit
     void addDigitToRect(int xs,int ys,int xe,int ye);
 

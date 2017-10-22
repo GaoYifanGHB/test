@@ -19,6 +19,7 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
+    bool f;
     void drawGrid(int len,int width,int height);
     void initGridSize(int l,int w,int h);
     void drawOneGrid(int x,int y,QColor color);
