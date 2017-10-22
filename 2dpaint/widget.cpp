@@ -8,6 +8,7 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     f=true;
+
 }
 
 Widget::~Widget()
@@ -26,11 +27,11 @@ void Widget::test(int w, int l)
         cls.push_back(QColor(110,110,110));
         cls.push_back(QColor(70,60,30));
         cls.push_back(QColor(40,40,40));
-        cls.push_back(QColor(40,70,40));
+        cls.push_back(QColor(7,75,60));
         vector<int>rls;
         rls.push_back(3);
-        rls.push_back(2);
-        rls.push_back(2);
+        rls.push_back(3);
+        rls.push_back(3);
         rls.push_back(5);
         dm.setColorList(cls);
         dm.setColorRatio(rls);
@@ -38,7 +39,7 @@ void Widget::test(int w, int l)
         dm.showAll(w,l);
 
     }
-    drawAllGrid(-(w/2),-l/2,(w/2)-1,l/2-1,QColor(40,70,40));
+    drawAllGrid(-(w/2),-l/2,(w/2)-1,l/2-1,QColor(7,75,60));
     f=false;
     cout<<"着色"<<endl;
     vector<Digit> ds=dm.getDigitList();
@@ -69,24 +70,24 @@ void Widget::drawGrid(int l, int w, int h)
     int cw=width()/2;
     test(w,l);
 
-//    drawOneGrid(0,0,Qt::red);
+    //    drawOneGrid(0,0,Qt::red);
     //画横线
-    for(int i=-l/2-h;i<=l/2+h;i++){
-        if(i>=-l/2&&i<=l/2){
-            painters.drawLine(QPoint(cw-(w/2+h)*gridsize,cl+i*gridsize),QPoint(cw+(w/2+h)*gridsize,cl+i*gridsize));
-        }else{
-            painters.drawLine(QPoint(cw-w/2*gridsize,cl+i*gridsize),QPoint(cw+w/2*gridsize,cl+i*gridsize));
-        }
-    }
-    //画竖线
-    for(int i=-w/2-h;i<=w/2+h;i++){
-        if(i>=-w/2&&i<=w/2){
-            painters.drawLine(QPoint(cw+i*gridsize,cl-(l/2+h)*gridsize),QPoint(cw+i*gridsize,cl+(l/2+h)*gridsize));
-        }else{
-            painters.drawLine(QPoint(cw+i*gridsize,cl-(l/2)*gridsize),QPoint(cw+i*gridsize,cl+(l/2)*gridsize));
-        }
+    //    for(int i=-l/2-h;i<=l/2+h;i++){
+    //        if(i>=-l/2&&i<=l/2){
+    //            painters.drawLine(QPoint(cw-(w/2+h)*gridsize,cl+i*gridsize),QPoint(cw+(w/2+h)*gridsize,cl+i*gridsize));
+    //        }else{
+    //            painters.drawLine(QPoint(cw-w/2*gridsize,cl+i*gridsize),QPoint(cw+w/2*gridsize,cl+i*gridsize));
+    //        }
+    //    }
+    //    //画竖线
+    //    for(int i=-w/2-h;i<=w/2+h;i++){
+    //        if(i>=-w/2&&i<=w/2){
+    //            painters.drawLine(QPoint(cw+i*gridsize,cl-(l/2+h)*gridsize),QPoint(cw+i*gridsize,cl+(l/2+h)*gridsize));
+    //        }else{
+    //            painters.drawLine(QPoint(cw+i*gridsize,cl-(l/2)*gridsize),QPoint(cw+i*gridsize,cl+(l/2)*gridsize));
+    //        }
 
-    }
+    //    }
 }
 
 void Widget::initGridSize(int l,int w,int h)
@@ -99,11 +100,24 @@ void Widget::initGridSize(int l,int w,int h)
 }
 
 void Widget::paintEvent(QPaintEvent *event){
-    int l=1200;
-    int w=1500;
-    int h=100;
-
+    int l=1800;
+    int w=2000;
+    int h=300;
+    //    cout<<event->globalPos();
     drawGrid(l,w,h);
+
+}
+
+void Widget::mousePressEvent(QMouseEvent *event)
+{
+//    QPainter *painters=new QPainter(this);
+    cout<<event->x()<<" "<<event->y();
+//    painters->fillRect(QRect(QPoint(event->x(),event->y()),QPoint(event->x()+gridsize*10,event->y()+gridsize*10)), QBrush(QColor(255,0,0)));
+//    drawOneGrid(0,0,QColor(255,0,0));
+    this->update();
+//    painters->fillRect(QRect(QPoint(event->x(),event->y()),QPoint(event->x()+gridsize*10,event->y()+gridsize*10)), QBrush(QColor(255,0,0)));
+
+    //    event->x
 }
 
 void Widget::drawOneGrid(int x, int y, QColor color)

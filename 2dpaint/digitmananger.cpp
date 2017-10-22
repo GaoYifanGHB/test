@@ -68,6 +68,7 @@ void DigitMananger::addDigitToRect(int xs, int ys, int xe, int ye)
             d.setLocation(x,y);
             rebuildDigit(d,xs,ys,xe,ye);
             digitList.push_back(d);
+//            tx=d.getWidth()*2/3;
             tx=d.getWidth()/2;
             if(ty<d.getLength())ty=d.getLength();
         }
@@ -163,9 +164,7 @@ void DigitMananger::rebuildDigit(Digit &d,int xs,int ys,int xe,int ye)
 //                        cout<<check[i+d.getLocationY()-ys][j+d.getLocationX()-xs]<<endl;
                         d.num--;
                         d.mat[i][j]=0;
-//                        check[i+d.getLocationY()-ys][j+d.getLocationX()-xs]=digitList.size();
                     }else{
-                        //??????????????????????????此处可能存在问题??????????????
                         int n=check[i+d.getLocationY()-ys][j+d.getLocationX()-xs];
                         int ii=i+d.getLocationY()-digitList[n].getLocationY();
                         int jj=j+d.getLocationX()-digitList[n].getLocationX();

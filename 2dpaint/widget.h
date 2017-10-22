@@ -5,6 +5,7 @@
 #include<QPainter>
 #include<QPoint>
 #include<cstdio>
+#include<QMouseEvent>
 #include"digitmananger.h"
 
 
@@ -28,6 +29,7 @@ public:
     void test(int w, int l);
 protected:
     void paintEvent(QPaintEvent *);
+    void mousePressEvent(QMouseEvent *);
 
 private:
     Ui::Widget *ui;
