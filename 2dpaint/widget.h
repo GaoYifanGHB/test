@@ -8,7 +8,7 @@
 #include"editdigitdialog.h"
 #include<QMouseEvent>
 #include"digitmananger.h"
-#include"editdigit.h"
+//#include"editdigit.h"
 #include<QMessageBox>
 
 
@@ -23,7 +23,7 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
-    EditDigit *ed;
+//    EditDigit *ed;
     EditDigitDialog *edg;
     bool f;
     //»­³ö×ø±ê¸ñ
@@ -44,6 +44,8 @@ public:
     void setColors(vector<QColor>cls,vector<int>rs);
 
     void init();
+public slots:
+    void getDigit(Digit,int);
 protected:
     void paintEvent(QPaintEvent *);
     void mousePressEvent(QMouseEvent *);

@@ -12,9 +12,10 @@ EditDigitDialog::~EditDigitDialog()
 {
     delete ui;
 }
-void EditDigitDialog::setDigit(Digit d)
+void EditDigitDialog::setDigit(Digit d,int n)
 {
     this->d=d;
+    this->n=n;
 }
 void EditDigitDialog::initGridSize(int l, int w)
 {
@@ -58,3 +59,35 @@ void EditDigitDialog::paintEvent(QPaintEvent *event)
     }
 }
 
+void EditDigitDialog::mousePressEvent(QMouseEvent *event)
+{
+    int w=d.getWidth();int l=d.getLength();
+    int xs=-w/2,ys=-l/2;
+    int x=toRX(event->x());
+    int y=toRY(event->y());
+    d.mat[y-ys+2][x-xs]=!d.mat[y-ys+2][x-xs];
+    this->update();
+}
+
+int EditDigitDialog::toRX(int x)
+{
+    int cw=width()/2;
+    int xx=x-cw;
+    if(xx<0)xx-=gridsize;
+    xx/=gridsize;
+    return xx;
+}
+int EditDigitDialog::toRY(int y)
+{
+    int cl=height()/2;
+    int yy=y-cl;
+    if(yy<0)yy-=gridsize;
+    yy/=gridsize;
+    return yy;
+}
+
+
+void EditDigitDialog::on_buttonBox_accepted()
+{
+    emit sendDigit(d,n);
+}

@@ -6,11 +6,11 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QTextCodec *codec = QTextCodec::codecForName("gbk");//ַי¿צ1
+//    QTextCodec *codec = QTextCodec::codecForName("utf-8");
 
-    QTextCodec::setCodecForTr(codec);
-    QTextCodec::setCodecForLocale(codec);
-    QTextCodec::setCodecForCStrings(codec);
+//    QTextCodec::setCodecForTr(codec);
+//    QTextCodec::setCodecForLocale(codec);
+//    QTextCodec::setCodecForCStrings(codec);
 
     Widget w;
     w.show();

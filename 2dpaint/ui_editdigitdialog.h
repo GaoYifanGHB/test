@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'editdigitdialog.ui'
 **
-** Created: Mon Oct 23 18:38:40 2017
+** Created: Mon Oct 23 21:53:03 2017
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -35,6 +35,7 @@ public:
         buttonBox->setGeometry(QRect(50, 260, 341, 32));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        buttonBox->setCenterButtons(false);
 
         retranslateUi(EditDigitDialog);
         QObject::connect(buttonBox, SIGNAL(accepted()), EditDigitDialog, SLOT(accept()));

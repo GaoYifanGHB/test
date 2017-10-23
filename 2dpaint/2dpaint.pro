@@ -16,15 +16,12 @@ SOURCES += main.cpp\
         widget.cpp \
     digit.cpp \
     digitmananger.cpp \
-    editdigit.cpp \
     editdigitdialog.cpp
 
 HEADERS  += widget.h \
     digit.h \
     digitmananger.h \
-    editdigit.h \
     editdigitdialog.h
 
 FORMS    += widget.ui \
-    editdigit.ui \
     editdigitdialog.ui
