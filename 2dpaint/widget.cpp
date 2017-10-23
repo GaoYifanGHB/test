@@ -7,7 +7,8 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    f=true;
+    setSize(400,600,100);
+    init();
 
 }
 
@@ -17,30 +18,34 @@ Widget::~Widget()
 }
 
 
-//画出网格
-void Widget::test(int w, int l)
-{
-    if(f){
-        dm.initAll();
-        dm.addDigitToRect(-(w/2),-l/2,(w/2)-1,l/2-1);
-        vector<QColor>cls;
-        cls.push_back(QColor(110,110,110));
-        cls.push_back(QColor(70,60,30));
-        cls.push_back(QColor(40,40,40));
-        cls.push_back(QColor(7,75,60));
-        vector<int>rls;
-        rls.push_back(3);
-        rls.push_back(3);
-        rls.push_back(3);
-        rls.push_back(5);
-        dm.setColorList(cls);
-        dm.setColorRatio(rls);
-        dm.drawAllDigltColor();
-        dm.showAll(w,l);
 
-    }
-    drawAllGrid(-(w/2),-l/2,(w/2)-1,l/2-1,QColor(7,75,60));
-    f=false;
+void Widget::init()
+{
+    dm.addDigitToRect(-(w/2),-l/2,(w/2)-1,l/2-1);
+    dm.addDigitToRect(-(w/2),-l/2-h,(w/2)-1,-l/2-1);
+    dm.addDigitToRect(-(w/2)-h,-l/2,-(w/2)-1,l/2-1);
+    dm.addDigitToRect(-(w/2),l/2,(w/2)-1,l/2-1+h);
+    dm.addDigitToRect((w/2),-l/2,(w/2)+h-1,l/2-1);
+    cls.push_back(QColor(110,110,110));
+    cls.push_back(QColor(70,60,30));
+    cls.push_back(QColor(40,40,40));
+    cls.push_back(QColor(7,75,60));
+    rls.push_back(3);
+    rls.push_back(3);
+    rls.push_back(3);
+    rls.push_back(5);
+    dm.setColorList(cls);
+    dm.setColorRatio(rls);
+    dm.drawAllDigltColor();
+}
+
+void Widget::drawDigitRect()
+{
+    drawAllGrid(-(w/2),-l/2,(w/2)-1,l/2-1,cls[cls.size()-1]);
+    drawAllGrid(-(w/2),-l/2-h,(w/2)-1,-l/2-1,cls[cls.size()-1]);
+    drawAllGrid(-(w/2)-h,-l/2,-(w/2)-1,l/2-1,cls[cls.size()-1]);
+    drawAllGrid(-(w/2),l/2,(w/2)-1,l/2-1+h,cls[cls.size()-1]);
+    drawAllGrid((w/2),-l/2,(w/2)+h-1,l/2-1,cls[cls.size()-1]);
     cout<<"着色"<<endl;
     vector<Digit> ds=dm.getDigitList();
     for(int i=0;i<ds.size();i++){
@@ -49,76 +54,101 @@ void Widget::test(int w, int l)
                 if(ds[i].mat[j][k]){
                     drawOneGrid(ds[i].getLocationX()+k,ds[i].getLocationY()+j,ds[i].getColor());
                 }
-
             }
         }
     }
+    cout<<"板块数量："<<ds.size()<<endl;
 }
-
-
-
-void Widget::drawGrid(int l, int w, int h)
+//---------------------设置初始参数-------------------------
+//长宽高
+void Widget::setSize(int l, int w, int h)
 {
-    QPainter painters(this);
-    QPainter painters1(this);
-    //    cout<<"huaxian"<<endl;
-    initGridSize(l,w,h);
-    l/=10;
-    w/=10;
-    h/=10;
-    int cl=height()/2;
-    int cw=width()/2;
-    test(w,l);
-
-    //    drawOneGrid(0,0,Qt::red);
-    //画横线
-    //    for(int i=-l/2-h;i<=l/2+h;i++){
-    //        if(i>=-l/2&&i<=l/2){
-    //            painters.drawLine(QPoint(cw-(w/2+h)*gridsize,cl+i*gridsize),QPoint(cw+(w/2+h)*gridsize,cl+i*gridsize));
-    //        }else{
-    //            painters.drawLine(QPoint(cw-w/2*gridsize,cl+i*gridsize),QPoint(cw+w/2*gridsize,cl+i*gridsize));
-    //        }
-    //    }
-    //    //画竖线
-    //    for(int i=-w/2-h;i<=w/2+h;i++){
-    //        if(i>=-w/2&&i<=w/2){
-    //            painters.drawLine(QPoint(cw+i*gridsize,cl-(l/2+h)*gridsize),QPoint(cw+i*gridsize,cl+(l/2+h)*gridsize));
-    //        }else{
-    //            painters.drawLine(QPoint(cw+i*gridsize,cl-(l/2)*gridsize),QPoint(cw+i*gridsize,cl+(l/2)*gridsize));
-    //        }
-
-    //    }
+    this->l=l/10;
+    this->w=w/10;
+    this->h=h/10;
+    initGridSize();
 }
-
-void Widget::initGridSize(int l,int w,int h)
+void Widget::initGridSize()
 {
     double m=l>w?l:w;
     m+=2*h;
-    double n=height()>width()?height():width();
-    n*=0.9;
-    gridsize=(int)(n/m*10.0);
+    double n=height()<width()?height():width();
+    gridsize=(int)(n/m*1.2);
+}
+//颜色及比例
+void Widget::setColors(vector<QColor> cls, vector<int> rs)
+{
+    this->cls=cls;
+    this->rls=rs;
+}
+//----------------------------------------------------------
+
+
+
+//-------------------画出网格--------------------------------
+void Widget::drawGrid()
+{
+    QPainter painters(this);
+    int cl=height()/2;
+    int cw=width()/2;
+    //画横线
+    for(int i=-l/2-h;i<=l/2+h;i++){
+        if(i>=-l/2&&i<=l/2){
+            painters.drawLine(QPoint(cw-(w/2+h)*gridsize,cl+i*gridsize),QPoint(cw+(w/2+h)*gridsize,cl+i*gridsize));
+        }else{
+            painters.drawLine(QPoint(cw-w/2*gridsize,cl+i*gridsize),QPoint(cw+w/2*gridsize,cl+i*gridsize));
+        }
+    }
+    //画竖线
+    for(int i=-w/2-h;i<=w/2+h;i++){
+        if(i>=-w/2&&i<=w/2){
+            painters.drawLine(QPoint(cw+i*gridsize,cl-(l/2+h)*gridsize),QPoint(cw+i*gridsize,cl+(l/2+h)*gridsize));
+        }else{
+            painters.drawLine(QPoint(cw+i*gridsize,cl-(l/2)*gridsize),QPoint(cw+i*gridsize,cl+(l/2)*gridsize));
+        }
+
+    }
 }
 
 void Widget::paintEvent(QPaintEvent *event){
-    int l=1800;
-    int w=2000;
-    int h=300;
-    //    cout<<event->globalPos();
-    drawGrid(l,w,h);
-
+    initGridSize();
+    drawGrid();
+    drawDigitRect();
 }
+
 
 void Widget::mousePressEvent(QMouseEvent *event)
 {
-//    QPainter *painters=new QPainter(this);
-    cout<<event->x()<<" "<<event->y();
-//    painters->fillRect(QRect(QPoint(event->x(),event->y()),QPoint(event->x()+gridsize*10,event->y()+gridsize*10)), QBrush(QColor(255,0,0)));
-//    drawOneGrid(0,0,QColor(255,0,0));
+    int x=toRX(event->x());
+    int y=toRY(event->y());
+    int i=dm.getDigitLocal(x,y);
+    if(i!=-1){
+        edg=new EditDigitDialog(this);
+        edg->setDigit(dm.getDigitList()[i]);
+        edg->show();
+    }else{
+        QMessageBox::information(this,"提示","这是一个消息框");
+    }
     this->update();
-//    painters->fillRect(QRect(QPoint(event->x(),event->y()),QPoint(event->x()+gridsize*10,event->y()+gridsize*10)), QBrush(QColor(255,0,0)));
-
-    //    event->x
 }
+//--------------------获取相对坐标------------------------
+int Widget::toRX(int x)
+{
+    int cw=width()/2;
+    int xx=x-cw;
+    if(xx<0)xx-=gridsize;
+    xx/=gridsize;
+    return xx;
+}
+int Widget::toRY(int y)
+{
+    int cl=height()/2;
+    int yy=y-cl;
+    if(yy<0)yy-=gridsize;
+    yy/=gridsize;
+    return yy;
+}
+//--------------------------------------------------------
 
 void Widget::drawOneGrid(int x, int y, QColor color)
 {

@@ -2,6 +2,7 @@
 
 DigitMananger::DigitMananger()
 {
+    initAll();
 }
 //初始化，主要功能是
 //1.从所有文件中读出的digit赋值给mould
@@ -12,6 +13,12 @@ void DigitMananger::initAll()
     stringstream ss;
     string filename;
     allArea=0;
+    this->mould.clear();
+    this->colorList.clear();
+    this->digitList.clear();
+    this->ratio.clear();
+    this->areas.clear();
+    memset(check,-1,sizeof(check));
     for(int i=1;i<=5;i++){
         ss<<i;
         ss>>filename;
@@ -27,7 +34,9 @@ void DigitMananger::initAll()
             for(int j=0;j<w;j++){
                 fs>>mat[i][j];
                 if(mat[i][j])num++;
+                cout<<mat[i][j]<<" ";
             }
+            cout<<endl;
         }
         filename="";
         fs.close();
@@ -36,39 +45,28 @@ void DigitMananger::initAll()
     }
 }
 
-void DigitMananger::showAll(int l, int w)
-{
-//    for(int i=0;i<l;i++){
-//        for(int j=0;j<w;j++){
-//            cout<<setw(4)<<digitList[check[i][j]];
-//        }
-//        cout<<endl;
-//    }
-}
-
 
 
 void DigitMananger::addDigitToRect(int xs, int ys, int xe, int ye)
 {
     srand(time(NULL));
-    int l=ye-ys,w=xe-xs;
+    int l=ye-ys+1,w=xe-xs+1;
     allArea+=l*w;
     cout<<xs<<" "<<ys<<" "<<xe<<" "<<ye<<endl;
-    cout << l << " " << w << endl;
-    for(int i=0;i<l;i++){
-        for(int j=0;j<w;j++){
+    //    cout << l << " " << w << endl;
+    for(int i=getMatY(ys);i<=getMatY(ye);i++){
+        for(int j=getMatX(xs);j<=getMatX(xe);j++){
             check[i][j]=-1;
         }
     }
-    int tx=0,ty=0,i=0;
-    for(int y=ys;y<ye;y+=ty){
+    int tx=0,ty=0;
+    for(int y=ys;y<=ye;y+=ty){
         ty=0;
-        for(int x=xs;x<xe;x+=tx){
+        for(int x=xs;x<=xe;x+=tx){
             Digit d=getRandomDigit();
             d.setLocation(x,y);
-            rebuildDigit(d,xs,ys,xe,ye);
+            adjustDigit(d,xs,ys,xe,ye);
             digitList.push_back(d);
-//            tx=d.getWidth()*2/3;
             tx=d.getWidth()/2;
             if(ty<d.getLength())ty=d.getLength();
         }
@@ -102,24 +100,24 @@ void DigitMananger::drawAllDigltColor()
     for(int i=0;i<digitList.size();i++){
         drawOneDigltColor(i);
     }
-//    for(int i=0;i<areas.size();i++){
-//        cout<<areas[i]<<" ";
-//    }
-//    cout<<endl;
+    //    for(int i=0;i<areas.size();i++){
+    //        cout<<areas[i]<<" ";
+    //    }
+    //    cout<<endl;
 
 }
 
 void DigitMananger::printCheck(int xs, int ys, int xe, int ye)
 {
     //    cout<<"printCheck"<<endl;
-    int l=ye-ys,w=xe-xs;
 
-    for(int i=0;i<l;i++){
-        for(int j=0;j<w;j++){
+    for(int i=getMatY(ys);i<=getMatY(ye);i++){
+        for(int j=getMatX(xs);j<=getMatX(xe);j++){
             cout<<setw(4)<<check[i][j];
         }
         cout<<endl;
     }
+    cout<<getMatX(xs)<<" "<<getMatY(ys)<<" "<<getMatX(xe)<<" "<<getMatY(ye)<<endl;
 
 }
 
@@ -129,50 +127,52 @@ Digit DigitMananger::getRandomDigit()
 
     int c=(int)(rand()%mould.size());
     Digit d=mould[c];
-//    cout<<c<<endl;
     return d;
 }
 
 //重排函数，对digitList进行重新排序，使digitList不在连续，从而增加涂色的随机性
 void DigitMananger::randomSort()
 {
-
     for(int i=0;i<digitList.size();i++){
-//        srand(time(NULL));
         int c=(int)(rand()%digitList.size());
         swap(digitList[i],digitList[c]);
+    }
+    for(int k=0;k<digitList.size();k++){
+        Digit d= digitList[k];
+        for(int i=0;i<d.getLength();i++){
+            for(int j=0;j<d.getWidth();j++){
+                if(d.mat[i][j]){
+                    check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())]=k;
+                }
+            }
+        }
     }
 }
 
 
-void DigitMananger::rebuildDigit(Digit &d,int xs,int ys,int xe,int ye)
+void DigitMananger::adjustDigit(Digit &d,int xs,int ys,int xe,int ye)
 {
-    int c=(int)(rand()%2);
-//    srand(time(NULL));
+    int f=(int)(rand()%2);
     for(int i=0;i<d.getLength();i++){
         for(int j=0;j<d.getWidth();j++){
             if(d.mat[i][j]){
                 if(i+d.getLocationY()<ys||i+d.getLocationY()>ye||j+d.getLocationX()>xe||j+d.getLocationX()<xs){
-                    cout<<"出界点："<<j+d.getLocationX()<<" "<<i+d.getLocationY()<<endl;
                     d.mat[i][j]=0;
                     d.num--;
                 }
-                else if(check[i+d.getLocationY()-ys][j+d.getLocationX()-xs]==-1){
-                    check[i+d.getLocationY()-ys][j+d.getLocationX()-xs]=digitList.size();
+                else if(check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())]==-1){
+                    check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())]=digitList.size();
                 }else{
-                    if(c){
-//                        cout<<check[i+d.getLocationY()-ys][j+d.getLocationX()-xs]<<endl;
+                    if(f){
                         d.num--;
                         d.mat[i][j]=0;
                     }else{
-                        int n=check[i+d.getLocationY()-ys][j+d.getLocationX()-xs];
+                        int n=check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())];
                         int ii=i+d.getLocationY()-digitList[n].getLocationY();
                         int jj=j+d.getLocationX()-digitList[n].getLocationX();
-
-//                        cout<<digitList[n].mat[ii][jj]<<"     "<<n<<endl;
                         digitList[n].mat[ii][jj]=0;
                         digitList[n].num--;
-                        check[i+d.getLocationY()-ys][j+d.getLocationX()-xs]=digitList.size();
+                        check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())]=digitList.size();
                     }
                 }
             }
@@ -207,6 +207,22 @@ void DigitMananger::drawOneDigltColor(int i)
         areas[t]+=digitList[i].num;
         areas[colorList.size()-1]-=digitList[i].num;
     }
+}
+
+int DigitMananger::getMatX(int x)
+{
+    return x+300;
+}
+
+int DigitMananger::getMatY(int y)
+{
+    return y+300;
+}
+
+int DigitMananger::getDigitLocal(int x, int y)
+{
+    cout<<getMatX(x)<<" ---- "<<getMatY(y)<<endl;
+    return check[getMatY(y)][getMatX(x)];
 }
 
 vector<Digit> DigitMananger::getDigitList()
