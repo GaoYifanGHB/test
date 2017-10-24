@@ -30,6 +30,7 @@ private:
     void randomSort();
     //在矩阵过程中对digitList进行修正
     void adjustDigit(Digit &d,int xs,int ys,int xe,int ye);
+
     //该矩阵用来记录图中每个点对应小数码块的位置，判断矩阵生成的小数码块是否存在重合，该矩阵使得屏幕支持的最大分辨率为600*600
     //生成窗口的中点(0,0)需与矩阵的中点(300,300)对齐
     int check[610][610];
@@ -48,6 +49,9 @@ public:
     //根据相对坐标获取一个数码块在digitList中的位置
     int getDigitLocal(int x,int y);
     vector<Digit> getDigitList();
+
+    //根据第n块小方块调整其他变量
+    void rebuildDigit(Digit d,int n);
     DigitMananger();
     //初始化全部
     void initAll();

@@ -180,6 +180,29 @@ void DigitMananger::adjustDigit(Digit &d,int xs,int ys,int xe,int ye)
     }
 }
 
+void DigitMananger::rebuildDigit(Digit d, int x)
+{
+    for(int i=0;i<d.getLength();i++){
+        for(int j=0;j<d.getWidth();j++){
+            if(d.mat[i][j]){
+                if(check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())]==-1){
+                    check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())]=x;
+
+                }else{
+                    int n=check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())];
+                    int ii=i+d.getLocationY()-digitList[n].getLocationY();
+                    int jj=j+d.getLocationX()-digitList[n].getLocationX();
+                    digitList[n].mat[ii][jj]=0;
+                    digitList[n].num--;
+                    check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())]=x;
+
+                }
+            }
+        }
+    }
+    digitList[x]=d;
+}
+
 int DigitMananger::getNeedColor()
 {
     int x=-1;

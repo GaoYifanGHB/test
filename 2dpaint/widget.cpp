@@ -7,7 +7,7 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    setSize(400,600,100);
+    setSize(600,800,100);
     init();
 
 }
@@ -41,10 +41,12 @@ void Widget::init()
 
 void Widget::getDigit(Digit d,int n)
 {
-    cout<<n<<"-----00000=========="<<d.getNum()<<endl;
+//    cout<<n<<"-----00000=========="<<d.getNum()<<endl;
+    dm.rebuildDigit(d,n);
+    this->update();
 //    dm.getDigitList()
 }
-
+//画出网格
 void Widget::drawDigitRect()
 {
     drawAllGrid(-(w/2),-l/2,(w/2)-1,l/2-1,cls[cls.size()-1]);
@@ -134,7 +136,7 @@ void Widget::mousePressEvent(QMouseEvent *event)
         connect(edg,SIGNAL(sendDigit(Digit,int)),this,SLOT(getDigit(Digit,int)));
         edg->show();
     }else{
-        QMessageBox::information(this,"提示","这是一个消息框");
+        QMessageBox::information(this,"k","this is backgroud color");
     }
     this->update();
 }
