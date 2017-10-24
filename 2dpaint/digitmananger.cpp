@@ -180,6 +180,28 @@ void DigitMananger::adjustDigit(Digit &d,int xs,int ys,int xe,int ye)
     }
 }
 
+void DigitMananger::swapDigit(int i1, int i2)
+{
+    Digit d1=digitList[i1];
+
+    for(int i=0;i<d1.getLength();i++){
+        for(int j=0;j<d1.getWidth();j++){
+            if(d1.mat[i][j]){
+                check[getMatY(i+d1.getLocationY())][getMatX(j+d1.getLocationX())]=i2;
+            }
+        }
+    }
+    Digit d2=digitList[i2];
+    for(int i=0;i<d2.getLength();i++){
+        for(int j=0;j<d2.getWidth();j++){
+            if(d2.mat[i][j]){
+                check[getMatY(i+d2.getLocationY())][getMatX(j+d2.getLocationX())]=i1;
+            }
+        }
+    }
+    swap(digitList[i1],digitList[i2]);
+}
+
 void DigitMananger::rebuildDigit(Digit d, int x)
 {
     for(int i=0;i<d.getLength();i++){
@@ -244,7 +266,8 @@ int DigitMananger::getMatY(int y)
 
 int DigitMananger::getDigitLocal(int x, int y)
 {
-    cout<<getMatX(x)<<" ---- "<<getMatY(y)<<endl;
+    if(getMatX(x)<0||getMatX(x)>601||getMatY(y)<0||getMatY(y)>601)return -1;
+//    cout<<getMatX(x)<<" ---- "<<getMatY(y)<<endl;
     return check[getMatY(y)][getMatX(x)];
 }
 

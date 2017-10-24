@@ -15,8 +15,7 @@ class DigitMananger
 private:
     //mould 用来保存从所有文件中读出的digit
     vector<Digit>mould;
-    //digitList用来保存随机选择的digit列表,即要画到屏幕上去的digit
-    vector<Digit>digitList;
+
     //需要图的颜色
     vector<QColor>colorList;
     //各颜色所占的比例
@@ -48,8 +47,11 @@ private:
 public:
     //根据相对坐标获取一个数码块在digitList中的位置
     int getDigitLocal(int x,int y);
+    //digitList用来保存随机选择的digit列表,即要画到屏幕上去的digit
+    vector<Digit>digitList;
     vector<Digit> getDigitList();
-
+    //交换digitList中两个元素
+    void swapDigit(int i1,int i2);
     //根据第n块小方块调整其他变量
     void rebuildDigit(Digit d,int n);
     DigitMananger();

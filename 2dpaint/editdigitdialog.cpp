@@ -89,5 +89,12 @@ int EditDigitDialog::toRY(int y)
 
 void EditDigitDialog::on_buttonBox_accepted()
 {
+    int num=0;
+    for(int i=0;i<d.getLength();i++){
+        for(int j=0;j<d.getWidth();j++){
+            if(d.mat[i][j])num++;
+        }
+    }
+    d.num=num;
     emit sendDigit(d,n);
 }

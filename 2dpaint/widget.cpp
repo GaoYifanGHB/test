@@ -7,7 +7,8 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    setSize(600,800,100);
+    setSize(800,1000,200);
+    handleState=MOVEDIGIT;
     init();
 
 }
@@ -33,7 +34,7 @@ void Widget::init()
     rls.push_back(3);
     rls.push_back(3);
     rls.push_back(3);
-    rls.push_back(5);
+    rls.push_back(3);
     dm.setColorList(cls);
     dm.setColorRatio(rls);
     dm.drawAllDigltColor();
@@ -41,10 +42,10 @@ void Widget::init()
 
 void Widget::getDigit(Digit d,int n)
 {
-//    cout<<n<<"-----00000=========="<<d.getNum()<<endl;
+    //    cout<<n<<"-----00000=========="<<d.getNum()<<endl;
     dm.rebuildDigit(d,n);
     this->update();
-//    dm.getDigitList()
+    //    dm.getDigitList()
 }
 //画出网格
 void Widget::drawDigitRect()
@@ -54,7 +55,7 @@ void Widget::drawDigitRect()
     drawAllGrid(-(w/2)-h,-l/2,-(w/2)-1,l/2-1,cls[cls.size()-1]);
     drawAllGrid(-(w/2),l/2,(w/2)-1,l/2-1+h,cls[cls.size()-1]);
     drawAllGrid((w/2),-l/2,(w/2)+h-1,l/2-1,cls[cls.size()-1]);
-    cout<<"着色"<<endl;
+    //    cout<<"着色"<<endl;
     vector<Digit> ds=dm.getDigitList();
     for(int i=0;i<ds.size();i++){
         for(int j=0;j<ds[i].getLength();j++){
@@ -65,7 +66,7 @@ void Widget::drawDigitRect()
             }
         }
     }
-    cout<<"板块数量："<<ds.size()<<endl;
+    //    cout<<"板块数量："<<ds.size()<<endl;
 }
 //---------------------设置初始参数-------------------------
 //长宽高
@@ -116,6 +117,7 @@ void Widget::drawGrid()
         }
 
     }
+
 }
 
 void Widget::paintEvent(QPaintEvent *event){
@@ -130,15 +132,58 @@ void Widget::mousePressEvent(QMouseEvent *event)
     int x=toRX(event->x());
     int y=toRY(event->y());
     int i=dm.getDigitLocal(x,y);
-    if(i!=-1){
-        edg=new EditDigitDialog(this);
-        edg->setDigit(dm.getDigitList()[i],i);
-        connect(edg,SIGNAL(sendDigit(Digit,int)),this,SLOT(getDigit(Digit,int)));
-        edg->show();
-    }else{
-        QMessageBox::information(this,"k","this is backgroud color");
+    if(handleState==EDITDIGIT){
+        if(i!=-1){
+            edg=new EditDigitDialog(this);
+            edg->setDigit(dm.getDigitList()[i],i);
+            connect(edg,SIGNAL(sendDigit(Digit,int)),this,SLOT(getDigit(Digit,int)));
+            edg->show();
+        }else{
+            QMessageBox::information(this,"Tip","this is backgroud color");
+        }
+        this->update();
+    }else if(handleState==MOVEDIGIT){
+        this->moveNum=i;
+        if(i!=-1){
+            Digit dg=dm.getDigitList()[i];
+            cout<<dg.num<<endl;
+            //记录鼠标点击的点与digit初始点的坐标差
+            int cl=height()/2;
+            int cw=width()/2;
+            dx=event->x()- (cw+dg.getLocationX()*gridsize);
+            dy=event->y()- (cl+dg.getLocationY()*gridsize);
+            //交换被选中Digit与链表中最后一个digit
+            dm.swapDigit(i,dm.getDigitList().size()-1);
+//             dm.rebuildDigit(d,n);
+            //            cout<<"交换"<<i<<"  "<<dm.getDigitList().size()-1<<endl;
+            //            cout<<dm.getDigitList()[dm.getDigitList().size()-1].num<<endl;
+            cout<<"========="<<dm.getDigitLocal(x,y)<<endl;
+            cout<<dg.getLocationX()<<endl;
+            cout<<dg.getLocationY()<<endl;
+        }
     }
+    cout<<i<<endl;
+}
+
+void Widget::mouseMoveEvent(QMouseEvent *event)
+{
+    if(handleState!=MOVEDIGIT)return;
+    int x=event->x()+dx;
+    int y=event->y()+dy;
+    cout<<x<<" "<<y<<endl;
+    cout<<"-------------------------------"<<endl;
+    cout<<toRX(event->x())<<" "<<toRY(event->y())<<endl;
+//    cout<<dm.getDigitList().size()<<endl;
+    dm.getDigitList()[dm.getDigitList().size()-1].setLocation(toRX(x),toRY(y));
+    dm.digitList[dm.digitList.size()-1].setLocation(toRX(event->x()),toRY(event->y()));
+    cout<<dm.getDigitList()[dm.getDigitList().size()-1].getLocationX()<<" "<<dm.getDigitList()[dm.getDigitList().size()-1].getLocationY()<<endl;
+    cout<<"========================="<<endl;
     this->update();
+}
+
+void Widget::mouseReleaseEvent(QMouseEvent *)
+{
+
 }
 //--------------------获取相对坐标------------------------
 int Widget::toRX(int x)
@@ -165,7 +210,7 @@ void Widget::drawOneGrid(int x, int y, QColor color)
     int cl=height()/2;
     int cw=width()/2;
     painters->fillRect(QRect(QPoint(cw+(x)*gridsize,cl+(y)*gridsize),QPoint(cw+(x+1)*gridsize,cl+(y+1)*gridsize)), QBrush(color));
-
+    delete(painters);
 }
 void Widget::drawAllGrid(int xs, int ys,int xe,int ye, QColor color)
 {
@@ -173,6 +218,7 @@ void Widget::drawAllGrid(int xs, int ys,int xe,int ye, QColor color)
     int cl=height()/2;
     int cw=width()/2;
     painters->fillRect(QRect(QPoint(cw+xs*gridsize,cl+ys*gridsize),QPoint(cw+(xe+1)*gridsize,cl+(ye+1)*gridsize)), QBrush(color));
+    delete(painters);
 
 }
 

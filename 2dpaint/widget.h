@@ -8,9 +8,11 @@
 #include"editdigitdialog.h"
 #include<QMouseEvent>
 #include"digitmananger.h"
-//#include"editdigit.h"
 #include<QMessageBox>
 
+//鼠标事件
+
+//窗口状态
 
 namespace Ui {
 class Widget;
@@ -21,9 +23,23 @@ class Widget : public QWidget
     Q_OBJECT
     
 public:
+//    //定义鼠标时间
+//    const static int MOUSE_NULL = 0;
+//    const static int MOUSE_UP   = 1;
+//    const static int MOUSE_DOWN = 2;
+//    const static int MOUSE_MOVE = 3;
+//    int mouseEvent;
+
+    //定义当前操作
+    const static int NORMAL = 0;
+    const static int EDITDIGIT   = 1;
+    const static int  MOVEDIGIT = 2;
+    int handleState;
+
+
     explicit Widget(QWidget *parent = 0);
     ~Widget();
-//    EditDigit *ed;
+    //    EditDigit *ed;
     EditDigitDialog *edg;
     bool f;
     //画出坐标格
@@ -49,6 +65,9 @@ public slots:
 protected:
     void paintEvent(QPaintEvent *);
     void mousePressEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
+    void mouseReleaseEvent(QMouseEvent *);
+
 
 private:
     Ui::Widget *ui;
@@ -60,11 +79,18 @@ private:
     int toRX(int x);
     int toRY(int y);
 
+    int dx;
+    int dy;
+
     int gridsize;
     //图形的长宽高
     int h;
     int l;
     int w;
+
+
+    //移动过程中正在操作的小块编号
+    int moveNum;
 };
 
 #endif // WIDGET_H
