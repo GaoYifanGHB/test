@@ -8,7 +8,7 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     setSize(800,1000,200);
-    handleState=MOVEDIGIT;
+    handleState=EDITDIGIT;
     init();
 
 }
