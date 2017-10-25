@@ -1,0 +1,17 @@
+INPUT(
+./debug\main.o
+./debug\digitmainwindow.o
+./debug\widget.o
+./debug\editdigitdialog.o
+./debug\digitmananger.o
+./debug\digit.o
+./debug\setsizedialog.o
+./debug\dialog.o
+./debug\coloritem.o
+./debug\moc_digitmainwindow.o
+./debug\moc_widget.o
+./debug\moc_editdigitdialog.o
+./debug\moc_setsizedialog.o
+./debug\moc_dialog.o
+./debug\moc_coloritem.o
+);

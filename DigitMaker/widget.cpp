@@ -21,13 +21,14 @@ Widget::~Widget()
 
 void Widget::createDigitMap()
 {
+    dm.initAll();
     //生成五个矩形的数码迷彩块
     dm.addDigitToRect(-(w/2),-l/2,(w/2)-1,l/2-1);//中间
     dm.addDigitToRect(-(w/2),-l/2-h,(w/2)-1,-l/2-1);//上
     dm.addDigitToRect(-(w/2)-h,-l/2,-(w/2)-1,l/2-1);//左
     dm.addDigitToRect(-(w/2),l/2,(w/2)-1,l/2-1+h);//下
     dm.addDigitToRect((w/2),-l/2,(w/2)+h-1,l/2-1);//右
-    //设置颜色队列
+    //设置颜色及比例队列
     dm.setColorList(cls);
     dm.setColorRatio(rls);
     //为数码迷彩块涂色
@@ -42,7 +43,7 @@ void Widget::getDigit(Digit d,int n)
 //--------------------------画数码迷彩-----------------
 void Widget::drawDigitRect()
 {
-    //涂底色
+    //涂底色（颜色列表的最后一个颜色为底色）
     drawAllGrid(-(w/2),-l/2,(w/2)-1,l/2-1,cls[cls.size()-1]);
     drawAllGrid(-(w/2),-l/2-h,(w/2)-1,-l/2-1,cls[cls.size()-1]);
     drawAllGrid(-(w/2)-h,-l/2,-(w/2)-1,l/2-1,cls[cls.size()-1]);

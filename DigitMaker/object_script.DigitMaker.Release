@@ -1,0 +1,17 @@
+INPUT(
+./release\main.o
+./release\digitmainwindow.o
+./release\widget.o
+./release\editdigitdialog.o
+./release\digitmananger.o
+./release\digit.o
+./release\setsizedialog.o
+./release\dialog.o
+./release\coloritem.o
+./release\moc_digitmainwindow.o
+./release\moc_widget.o
+./release\moc_editdigitdialog.o
+./release\moc_setsizedialog.o
+./release\moc_dialog.o
+./release\moc_coloritem.o
+);

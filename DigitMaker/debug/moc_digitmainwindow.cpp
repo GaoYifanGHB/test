@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'digitmainwindow.h'
 **
-** Created: Wed Oct 25 15:45:30 2017
+** Created: Wed Oct 25 21:53:57 2017
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_DigitMainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,13 +31,21 @@ static const uint qt_meta_data_DigitMainWindow[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      17,   16,   16,   16, 0x08,
+      23,   17,   16,   16, 0x0a,
+      52,   44,   16,   16, 0x0a,
+      90,   16,   16,   16, 0x08,
+     115,   16,   16,   16, 0x08,
+     141,   16,   16,   16, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_DigitMainWindow[] = {
-    "DigitMainWindow\0\0on_actionNew_triggered()\0"
+    "DigitMainWindow\0\0l,w,h\0setSize(int,int,int)\0"
+    "cls,rls\0setColors(vector<QColor>,vector<int>)\0"
+    "on_actionNew_triggered()\0"
+    "on_radioButton_released()\0"
+    "on_radioButton_2_released()\0"
 };
 
 const QMetaObject DigitMainWindow::staticMetaObject = {
@@ -69,10 +77,14 @@ int DigitMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: on_actionNew_triggered(); break;
+        case 0: setSize((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 1: setColors((*reinterpret_cast< vector<QColor>(*)>(_a[1])),(*reinterpret_cast< vector<int>(*)>(_a[2]))); break;
+        case 2: on_actionNew_triggered(); break;
+        case 3: on_radioButton_released(); break;
+        case 4: on_radioButton_2_released(); break;
         default: ;
         }
-        _id -= 1;
+        _id -= 5;
     }
     return _id;
 }

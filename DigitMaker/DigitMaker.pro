@@ -17,14 +17,23 @@ SOURCES += main.cpp\
     widget.cpp \
     editdigitdialog.cpp \
     digitmananger.cpp \
-    digit.cpp
+    digit.cpp \
+    setsizedialog.cpp \
+    colorDialog/dialog.cpp \
+    colorDialog/coloritem.cpp
 
 HEADERS  += digitmainwindow.h \
     widget.h \
     editdigitdialog.h \
     digitmananger.h \
-    digit.h
+    digit.h \
+    setsizedialog.h \
+    colorDialog/dialog.h \
+    colorDialog/coloritem.h
 
 FORMS    += digitmainwindow.ui \
     widget.ui \
-    editdigitdialog.ui
+    editdigitdialog.ui \
+    setsizedialog.ui \
+    colorDialog/dialog.ui \
+    colorDialog/coloritem.ui
