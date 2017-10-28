@@ -146,14 +146,13 @@ void Widget::mousePressEvent(QMouseEvent *event)
             connect(edg,SIGNAL(sendDigit(Digit,int)),this,SLOT(getDigit(Digit,int)));
             edg->show();
         }else{
-            QMessageBox::information(this,"Tip","this is backgroud color");
+            QMessageBox::information(this,tr("提示"),tr("这是背景色"));
         }
         this->update();
     }else if(handleState==MOVEDIGIT){
         this->moveNum=i;
         if(i!=-1){
             Digit dg=dm.getDigitList()[i];
-            //            cout<<dg.num<<endl;
             //记录鼠标点击的点与digit初始点的坐标差
             int cl=height()/2;
             int cw=width()/2;
@@ -163,7 +162,6 @@ void Widget::mousePressEvent(QMouseEvent *event)
             dm.swapDigit(i,dm.getDigitList().size()-1);
         }
     }
-    cout<<i<<endl;
 }
 //鼠标移动
 void Widget::mouseMoveEvent(QMouseEvent *event)

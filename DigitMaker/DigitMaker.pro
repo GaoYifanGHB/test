@@ -10,7 +10,11 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = DigitMaker
 TEMPLATE = app
+INCLUDEPATH +=D:\OpenCV\MinGW\install\include
+INCLUDEPATH +=D:\OpenCV\MinGW\install\include\opencv
 
+
+LIBS+=D:\OpenCV\MinGW\install\lib\*.a\
 
 SOURCES += main.cpp\
         digitmainwindow.cpp \
@@ -19,8 +23,9 @@ SOURCES += main.cpp\
     digitmananger.cpp \
     digit.cpp \
     setsizedialog.cpp \
-    colorDialog/dialog.cpp \
-    colorDialog/coloritem.cpp
+    colorDialog\dialog.cpp \
+    colorDialog\coloritem.cpp \
+    fileHandle\filehandle.cpp
 
 HEADERS  += digitmainwindow.h \
     widget.h \
@@ -28,12 +33,13 @@ HEADERS  += digitmainwindow.h \
     digitmananger.h \
     digit.h \
     setsizedialog.h \
-    colorDialog/dialog.h \
-    colorDialog/coloritem.h
+    colorDialog\dialog.h \
+    colorDialog\coloritem.h \
+    fileHandle\filehandle.h
 
 FORMS    += digitmainwindow.ui \
     widget.ui \
     editdigitdialog.ui \
     setsizedialog.ui \
-    colorDialog/dialog.ui \
-    colorDialog/coloritem.ui
+    colorDialog\dialog.ui \
+    colorDialog\coloritem.ui

@@ -2,9 +2,12 @@
 #define DIGITMAINWINDOW_H
 
 #include <QMainWindow>
+#include<QFileDialog>
 #include "widget.h"
 #include "setsizedialog.h"
 #include "colorDialog/dialog.h"
+#include "fileHandle/filehandle.h"
+#include <string>
 namespace Ui {
 class DigitMainWindow;
 }
@@ -32,9 +35,16 @@ private slots:
 
     void on_radioButton_2_released();
 
+    void on_actionSave_triggered();
+
+    void on_actionOpen_triggered();
+
 private:
     Ui::DigitMainWindow *ui;
     int h,l,w;
+    FileHandle *fileHandle;
+    vector<QColor> cls;
+    vector<int> rls;
 };
 
 #endif // DIGITMAINWINDOW_H

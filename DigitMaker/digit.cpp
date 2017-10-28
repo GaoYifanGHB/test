@@ -44,23 +44,35 @@ void Digit::setColor(QColor color)
 {
     this->color=color;
 }
-//获取小版块矩阵
-void Digit::getMat(bool **mat)
+
+void Digit::print()
 {
-    for(int i=0;i<w;i++){
-        for(int j=0;j<l;j++){
-            mat[i][j]=this->mat[i][j];
+    for(int i=0;i<this->l;i++){
+        for(int j=0;j<this->w;j++){
+            std::cout<<mat[i][j]<<" ";
         }
+        std::cout<<std::endl;
     }
 }
+////获取小版块矩阵
+//void Digit::getMat(bool **mat)
+//{
+//    for(int i=0;i<w;i++){
+//        for(int j=0;j<l;j++){
+//            mat[i][j]=this->mat[i][j];
+//        }
+//    }
+//}
 //构造函数，初始化小版块
 Digit::Digit(int l, int w, bool mat[10][10],int num)
 {
     this->l=l;
     this->w=w;
     this->num=num;
-    for(int i=0;i<w;i++){
-        for(int j=0;j<l;j++){
+    memset(mat,0,sizeof(mat));
+    for(int i=0;i<l;i++){
+        for(int j=0;j<w;j++){
+            if(mat[i][j]!=0&&mat[i][j]!=1)mat[i][j]=0;
             this->mat[i][j]=mat[i][j];
         }
     }

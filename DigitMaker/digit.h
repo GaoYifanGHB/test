@@ -1,6 +1,8 @@
 #ifndef DIGIT_H
 #define DIGIT_H
 #include<QColor>
+#include<iostream>
+
 /*
     工具类，记录要画在画布上的小版块的相关属性
 */
@@ -16,7 +18,7 @@ private:
 
 
 public:
-    bool mat[10][10];//数码小块矩阵
+    bool mat[15][15];//数码小块矩阵
     int num;//小块中非零元素的个数
     int getLength();
     int getWidth();
@@ -29,8 +31,9 @@ public:
     //设置与获取颜色
     QColor getColor();
     void setColor(QColor color);
+    void print();
     //获取矩阵
-    void getMat(bool**mat);
+//    void getMat(bool**mat);
     Digit(int l,int w,bool mat1[10][10],int num);
 
     Digit();

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'digitmainwindow.ui'
 **
-** Created: Wed Oct 25 18:04:32 2017
+** Created: Thu Oct 26 21:31:06 2017
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -41,7 +41,7 @@ public:
     QStatusBar *statusBar;
     QDockWidget *toolWidget;
     QWidget *dockWidgetContents_2;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QRadioButton *radioButton;
     QRadioButton *radioButton_2;
@@ -78,20 +78,20 @@ public:
         toolWidget->setObjectName(QString::fromUtf8("toolWidget"));
         dockWidgetContents_2 = new QWidget();
         dockWidgetContents_2->setObjectName(QString::fromUtf8("dockWidgetContents_2"));
-        widget = new QWidget(dockWidgetContents_2);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(10, 30, 49, 40));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(dockWidgetContents_2);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 30, 49, 40));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        radioButton = new QRadioButton(widget);
+        radioButton = new QRadioButton(layoutWidget);
         radioButton->setObjectName(QString::fromUtf8("radioButton"));
 
         verticalLayout->addWidget(radioButton);
 
-        radioButton_2 = new QRadioButton(widget);
+        radioButton_2 = new QRadioButton(layoutWidget);
         radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
 
         verticalLayout->addWidget(radioButton_2);

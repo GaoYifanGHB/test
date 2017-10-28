@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'digitmainwindow.h'
 **
-** Created: Wed Oct 25 21:53:57 2017
+** Created: Fri Oct 27 20:23:16 2017
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_DigitMainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,6 +36,8 @@ static const uint qt_meta_data_DigitMainWindow[] = {
       90,   16,   16,   16, 0x08,
      115,   16,   16,   16, 0x08,
      141,   16,   16,   16, 0x08,
+     169,   16,   16,   16, 0x08,
+     195,   16,   16,   16, 0x08,
 
        0        // eod
 };
@@ -46,6 +48,8 @@ static const char qt_meta_stringdata_DigitMainWindow[] = {
     "on_actionNew_triggered()\0"
     "on_radioButton_released()\0"
     "on_radioButton_2_released()\0"
+    "on_actionSave_triggered()\0"
+    "on_actionOpen_triggered()\0"
 };
 
 const QMetaObject DigitMainWindow::staticMetaObject = {
@@ -82,9 +86,11 @@ int DigitMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 2: on_actionNew_triggered(); break;
         case 3: on_radioButton_released(); break;
         case 4: on_radioButton_2_released(); break;
+        case 5: on_actionSave_triggered(); break;
+        case 6: on_actionOpen_triggered(); break;
         default: ;
         }
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }

@@ -60,6 +60,8 @@ public:
     //在(xs-xe)(ys-ye)的矩形中自动添加digit
     void addDigitToRect(int xs,int ys,int xe,int ye);
 
+    //重新生成check
+    void rebulidCheck();
 
     //设置颜色图的颜色
     void setColorList(vector<QColor> cL);

@@ -32,6 +32,7 @@ void DigitMananger::initAll()
         fs>>l>>w;
         int num=0;
         bool mat[10][10];
+        memset(mat,0,sizeof(mat));
         for(int i=0;i<l;i++){
             for(int j=0;j<w;j++){
                 fs>>mat[i][j];
@@ -81,6 +82,20 @@ void DigitMananger::addDigitToRect(int xs, int ys, int xe, int ye)
         ty/=2;
     }
 }
+//重新生成check
+void DigitMananger::rebulidCheck()
+{
+    for(int k=0;k<digitList.size();k++){
+        Digit* d= &digitList[k];
+        for(int i=0;i<d->getLength();i++){
+            for(int j=0;j<d->getWidth();j++){
+                if(d->mat[i][j]){
+                    check[getMatY(i+d->getLocationY())][getMatX(j+d->getLocationX())]=k;
+                }
+            }
+        }
+    }
+}
 //根据比例对小斑块进行涂色
 void DigitMananger::drawAllDigltColor()
 {
@@ -107,10 +122,6 @@ void DigitMananger::setColorList(vector<QColor> cL)
 void DigitMananger::setColorRatio(vector<int> r)
 {
     this->ratio=r;
-    for(int i=0;i<colorList.size();i++){
-        cout<<ratio[i]<<" ";
-    }
-    cout<<endl;
 }
 
 
@@ -123,8 +134,6 @@ void DigitMananger::printCheck(int xs, int ys, int xe, int ye)
         }
         cout<<endl;
     }
-    cout<<getMatX(xs)<<" "<<getMatY(ys)<<" "<<getMatX(xe)<<" "<<getMatY(ye)<<endl;
-
 }
 
 //获取一个随机的小斑块
@@ -142,16 +151,7 @@ void DigitMananger::randomSort()
         int c=(int)(rand()%digitList.size());
         swap(digitList[i],digitList[c]);
     }
-    for(int k=0;k<digitList.size();k++){
-        Digit d= digitList[k];
-        for(int i=0;i<d.getLength();i++){
-            for(int j=0;j<d.getWidth();j++){
-                if(d.mat[i][j]){
-                    check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())]=k;
-                }
-            }
-        }
-    }
+    rebulidCheck();
 }
 
 
@@ -215,7 +215,6 @@ void DigitMananger::rebuildDigit(Digit d, int x)
             if(d.mat[i][j]){
                 if(check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())]==-1){
                     check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())]=x;
-
                 }else{
                     int n=check[getMatY(i+d.getLocationY())][getMatX(j+d.getLocationX())];
                     int ii=i+d.getLocationY()-digitList[n].getLocationY();

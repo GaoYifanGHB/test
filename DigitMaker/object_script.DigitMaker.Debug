@@ -8,6 +8,7 @@ INPUT(
 ./debug\setsizedialog.o
 ./debug\dialog.o
 ./debug\coloritem.o
+./debug\filehandle.o
 ./debug\moc_digitmainwindow.o
 ./debug\moc_widget.o
 ./debug\moc_editdigitdialog.o
