@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'dialog.h'
 **
-** Created: Wed Oct 25 21:43:54 2017
+** Created: Tue Oct 31 14:38:29 2017
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Dialog[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,6 +37,12 @@ static const uint qt_meta_data_Dialog[] = {
       48,    7,    7,    7, 0x08,
       72,    7,    7,    7, 0x08,
       98,    7,    7,    7, 0x08,
+     124,    7,    7,    7, 0x08,
+     152,    7,    7,    7, 0x08,
+     180,    7,    7,    7, 0x08,
+     206,    7,    7,    7, 0x08,
+     234,    7,    7,    7, 0x08,
+     262,    7,    7,    7, 0x08,
 
        0        // eod
 };
@@ -46,6 +52,12 @@ static const char qt_meta_stringdata_Dialog[] = {
     "on_pushButton_clicked()\0"
     "on_pushButton_3_clicked()\0"
     "on_pushButton_2_clicked()\0"
+    "on_radioButton_2_released()\0"
+    "on_radioButton_3_released()\0"
+    "on_radioButton_released()\0"
+    "on_radioButton_4_released()\0"
+    "on_radioButton_5_released()\0"
+    "on_pushButton_4_clicked()\0"
 };
 
 const QMetaObject Dialog::staticMetaObject = {
@@ -81,9 +93,15 @@ int Dialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 1: on_pushButton_clicked(); break;
         case 2: on_pushButton_3_clicked(); break;
         case 3: on_pushButton_2_clicked(); break;
+        case 4: on_radioButton_2_released(); break;
+        case 5: on_radioButton_3_released(); break;
+        case 6: on_radioButton_released(); break;
+        case 7: on_radioButton_4_released(); break;
+        case 8: on_radioButton_5_released(); break;
+        case 9: on_pushButton_4_clicked(); break;
         default: ;
         }
-        _id -= 4;
+        _id -= 10;
     }
     return _id;
 }

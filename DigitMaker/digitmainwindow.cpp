@@ -10,28 +10,12 @@ DigitMainWindow::DigitMainWindow(QWidget *parent) :
     childWidget->setGeometry(width()/10,height()/10,width()*4/5,height()*4/5);
     vector<QColor>cs;
     vector<int> rs;
-    //    //灰色
-    //    cs.push_back(QColor(110,110,110));
-    //    rs.push_back(3);
-    //    //土红色
-    //    cs.push_back(QColor(70,60,30));
-    //    rs.push_back(3);
-    //    //黑色
-    //    cs.push_back(QColor(40,40,40));
-    //    rs.push_back(3);
-    //    //绿色
-    //    cs.push_back(QColor(7,75,60));
-    //    rs.push_back(3);
-    //灰色
     cs.push_back(QColor(10,25,40));
     rs.push_back(3);
-    //土红色
     cs.push_back(QColor(0,35,80));
     rs.push_back(3);
-    //黑色
     cs.push_back(QColor(100,135,150));
     rs.push_back(3);
-    //绿色
     cs.push_back(QColor(70,90,110));
     rs.push_back(3);
 
@@ -46,12 +30,20 @@ DigitMainWindow::DigitMainWindow(QWidget *parent) :
     childWidget->createDigitMap();
     childWidget->setHandleState(Widget::NORMAL);
     childWidget->show();
+    updateSizeShow();
 }
 
 DigitMainWindow::~DigitMainWindow()
 {
     delete childWidget;
     delete ui;
+}
+
+void DigitMainWindow::updateSizeShow()
+{
+    ui->l_lab->setText(QString::number(this->l));
+    ui->w_lab->setText(QString::number(this->w));
+    ui->h_lab->setText(QString::number(this->h));
 }
 
 void DigitMainWindow::setSize(int l, int w, int h)
@@ -72,6 +64,7 @@ void DigitMainWindow::setColors(vector<QColor> cls, vector<int> rls)
     childWidget->setColors(cls,rls);
     childWidget->createDigitMap();
     childWidget->update();
+    this->updateSizeShow();
 }
 
 void DigitMainWindow::paintEvent(QPaintEvent *event)
@@ -108,7 +101,7 @@ void DigitMainWindow::on_radioButton_2_released()
 
 void DigitMainWindow::on_actionSave_triggered()
 {
-    QString qfilename=QFileDialog::getSaveFileName(this,tr("保存文件"),"defalut.g","*.g",0);
+    QString qfilename=QFileDialog::getSaveFileName(this,tr("保存文件"),"defalut.dmc","*.dmc",0);
     if(!qfilename.isNull()){
         string filename=qfilename.toStdString();
         cout<<filename<<endl;
@@ -122,11 +115,10 @@ void DigitMainWindow::on_actionSave_triggered()
 
 void DigitMainWindow::on_actionOpen_triggered()
 {
-    QString qfilename=QFileDialog::getOpenFileName(this,tr("打开文件"),"default.g","*.g",0);
+    QString qfilename=QFileDialog::getOpenFileName(this,tr("打开文件"),"default.dmc","*.dmc",0);
     if(!qfilename.isNull()){
         string filename=qfilename.toStdString();
         cout<<filename<<endl;
-
         fileHandle=new FileHandle(filename);
         fileHandle->read();
         DigitMananger dm=fileHandle->getDigitManager();
@@ -136,6 +128,7 @@ void DigitMainWindow::on_actionOpen_triggered()
         fileHandle->getColorList(cls,rls);
         childWidget->setColors(cls,rls);
         childWidget->update();
+        updateSizeShow();
     }
 
 }

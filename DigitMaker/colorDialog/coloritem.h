@@ -21,6 +21,7 @@ public:
     explicit ColorItem(QWidget *parent = 0);
     QColor color;
     QRect rect;
+    void setData(int num,QColor color);
     int getNum();
     ~ColorItem();
 

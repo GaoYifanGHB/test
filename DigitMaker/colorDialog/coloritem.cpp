@@ -10,6 +10,13 @@ ColorItem::ColorItem(QWidget *parent) :
     rect.setRect(135,1,20,20);
 }
 
+void ColorItem::setData(int num, QColor color)
+{
+    this->ui->lineEdit->setText(QString::number(num));
+    this->color=color;
+//    this->update();
+}
+
 int ColorItem::getNum()
 {
     QString s=ui->lineEdit->text();

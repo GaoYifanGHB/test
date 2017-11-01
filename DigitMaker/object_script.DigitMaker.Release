@@ -9,6 +9,7 @@ INPUT(
 ./release\dialog.o
 ./release\coloritem.o
 ./release\filehandle.o
+./release\colorhandle.o
 ./release\moc_digitmainwindow.o
 ./release\moc_widget.o
 ./release\moc_editdigitdialog.o

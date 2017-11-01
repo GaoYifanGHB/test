@@ -6,6 +6,9 @@ setSizeDialog::setSizeDialog(QWidget *parent) :
     ui(new Ui::setSizeDialog)
 {
     ui->setupUi(this);
+    ui->len_et->setText("1200");
+    ui->wid_et->setText("1500");
+    ui->hei_et->setText("600");
 }
 
 setSizeDialog::~setSizeDialog()

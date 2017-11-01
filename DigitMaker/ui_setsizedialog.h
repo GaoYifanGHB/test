@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'setsizedialog.ui'
 **
-** Created: Wed Oct 25 20:52:25 2017
+** Created: Sat Oct 28 13:23:08 2017
 **      by: Qt User Interface Compiler version 4.7.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -21,6 +21,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
+#include <QtGui/QSpacerItem>
 #include <QtGui/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
@@ -37,6 +38,7 @@ public:
     QLabel *label_3;
     QLineEdit *hei_et;
     QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
 
@@ -44,7 +46,7 @@ public:
     {
         if (setSizeDialog->objectName().isEmpty())
             setSizeDialog->setObjectName(QString::fromUtf8("setSizeDialog"));
-        setSizeDialog->resize(191, 133);
+        setSizeDialog->resize(289, 128);
         verticalLayout = new QVBoxLayout(setSizeDialog);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         gridLayout = new QGridLayout();
@@ -84,6 +86,10 @@ public:
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
         pushButton = new QPushButton(setSizeDialog);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
 

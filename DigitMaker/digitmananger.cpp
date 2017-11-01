@@ -30,13 +30,15 @@ void DigitMananger::initAll()
         cout << filename << endl;
         int l,w;
         fs>>l>>w;
-        int num=0;
-        bool mat[10][10];
+        int num=0,num2=0;
+        bool mat[10][10],mat2[10][10];
         memset(mat,0,sizeof(mat));
         for(int i=0;i<l;i++){
             for(int j=0;j<w;j++){
                 fs>>mat[i][j];
                 if(mat[i][j])num++;
+                mat2[j][i]=mat[i][j];
+                if(mat2[i][j])num2++;
                 cout<<mat[i][j]<<" ";
             }
             cout<<endl;
@@ -45,6 +47,8 @@ void DigitMananger::initAll()
         fs.close();
         Digit d(l,w,mat,num);
         this->mould.push_back(d);
+        Digit d2(w,l,mat2,num2);
+        this->mould.push_back(d2);
     }
 }
 

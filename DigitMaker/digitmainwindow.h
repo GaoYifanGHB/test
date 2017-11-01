@@ -22,6 +22,7 @@ public:
     Widget *childWidget;
     setSizeDialog *sizedg;
     Dialog *colordg;
+    void updateSizeShow();
 
 public slots:
     void setSize(int l,int w,int h);
@@ -38,6 +39,8 @@ private slots:
     void on_actionSave_triggered();
 
     void on_actionOpen_triggered();
+
+
 
 private:
     Ui::DigitMainWindow *ui;
